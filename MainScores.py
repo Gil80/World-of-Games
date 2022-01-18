@@ -22,4 +22,4 @@ def error_server():
     return render_template('error.html', ERROR=error)
 
 if __name__ == "__main__":
-    app.run()
+    app.run(host="0.0.0.0", port=8080) # this line was added for running form docker https://medium.com/@rokinmaharjan/running-a-flask-application-in-docker-80191791e143
