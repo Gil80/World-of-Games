@@ -1,4 +1,5 @@
 FROM python:3.8-slim-buster
+RUN apt-get update && apt-get install -y procps less wget curl net-tools
 
 #RUN pip install selenium
 ## install google chrome
@@ -39,5 +40,5 @@ RUN pip3 install -r requirements.txt
 
 
 CMD ["python3", "MainScores.py"]
-CMD ["python3", "tests/e2e.py"]
+#CMD ["python3", "tests/e2e.py"]
 
