@@ -1,24 +1,23 @@
-FROM python:3.10.1-bullseye
+FROM python:3.8-slim-buster
 
-RUN pip install selenium
-# install google chrome
-RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
-RUN sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
-RUN apt-get -y update
-RUN apt-get install -y google-chrome-stable
-
+#RUN pip install selenium
+## install google chrome
+#RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
+#RUN sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
+#RUN apt-get -y update
+#RUN apt-get install -y google-chrome-stable
+#
 # install chromedriver
-RUN apt-get install -yqq unzip
-RUN wget -O /tmp/chromedriver.zip http://chromedriver.storage.googleapis.com/`curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE`/chromedriver_linux64.zip
-RUN unzip /tmp/chromedriver.zip chromedriver -d /usr/local/bin/
-
+#UN apt-get install -yqq unzip
+#UN wget -O /tmp/chromedriver.zip http://chromedriver.storage.googleapis.com/`curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE`/chromedriver_linux64.zip
+#UN unzip /tmp/chromedriver.zip chromedriver -d /usr/local/bin/
+#
 # install requirements
 RUN python -m pip install --upgrade pip
-RUN pip install --no-cache-dir virtualenv
-RUN pip install --no-cache-dir getpass3
-RUN pip install --no-cache-dir requests
-RUN pip install --no-cache-dir flask
-RUN pip install --no-cache-dir utils
+#RUN pip install --no-cache-dir getpass3
+#RUN pip install --no-cache-dir requests
+#RUN pip install --no-cache-dir flask
+#RUN pip install --no-cache-dir utils
 
 
 #RUN useradd --create-home wog
@@ -31,8 +30,11 @@ RUN pip install --no-cache-dir utils
 
 # Set the working directory to /app
 WORKDIR /app
-COPY ["MainScores.py", "Scores.py", "Scores.txt", "Utils.py", "/app/"]
+COPY requirements.txt requirements.txt
+RUN pip3 install -r requirements.txt
+COPY ["MainScores.py", "Scores.py", "Scores.txt", "Utils.py", "chromedriver", "/app/"]
+COPY "tests/e2e.py" "/app/tests/"
 COPY templates/ /app/templates
 
-CMD python MainScores.py
+#CMD ["python3 MainScores.py", "python3 tests/e2e.py"]
 

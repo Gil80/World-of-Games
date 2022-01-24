@@ -12,7 +12,7 @@ def main_function():
     
 
 def test_score_service():
-    app_url = open_driver("http://127.0.0.1:5000")
+    app_url = open_driver("http://192.168.1.32:8080")
     between_range = check_score()
     driver.quit()
     return between_range
