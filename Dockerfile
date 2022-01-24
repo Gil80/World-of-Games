@@ -38,5 +38,6 @@ COPY templates/ /app/templates
 RUN pip3 install -r requirements.txt
 
 
-#CMD ["python3 MainScores.py", "python3 tests/e2e.py"]
+CMD ["python3", "MainScores.py"]
+CMD ["python3", "tests/e2e.py"]
 
