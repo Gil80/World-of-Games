@@ -1,8 +1,10 @@
-
 from selenium import webdriver
-from webdriver_manager.chrome import ChromeDriverManager
+#from webdriver_manager.chrome import ChromeDriverManager
 
-driver = webdriver.Chrome(ChromeDriverManager().install())
+
+driver = webdriver.Chrome(executable_path="/app/test/chromedriver")
+#driver = webdriver.Chrome(ChromeDriverManager().install())
+
 
 def main_function():
     if test_score_service():
@@ -12,7 +14,7 @@ def main_function():
     
 
 def test_score_service():
-    app_url = open_driver("http://192.168.1.32:8080")
+    app_url = open_driver("http://localhost:8080/")
     between_range = check_score()
     driver.quit()
     return between_range

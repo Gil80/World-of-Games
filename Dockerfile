@@ -27,14 +27,16 @@ RUN python -m pip install --upgrade pip
 ## activate virtual environment
 #ENV VIRTUAL_ENV=/home/wog/env
 #ENV PATH="/home/wog/venv/bin:$PATH"
+EXPOSE 8777
 
 # Set the working directory to /app
 WORKDIR /app
-COPY requirements.txt requirements.txt
-RUN pip3 install -r requirements.txt
-COPY ["MainScores.py", "Scores.py", "Scores.txt", "Utils.py", "chromedriver", "/app/"]
+COPY ["MainScores.py", "Scores.py", "Scores.txt", "Utils.py", "requirements.txt", "/app/"]
 COPY "tests/e2e.py" "/app/tests/"
+COPY "tests/chromedriver" "tests/chromedriver"
 COPY templates/ /app/templates
+RUN pip3 install -r requirements.txt
+
 
 #CMD ["python3 MainScores.py", "python3 tests/e2e.py"]
 
