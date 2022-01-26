@@ -1,5 +1,13 @@
-FROM python:3.8-slim-buster
-RUN apt-get update && apt-get install -y procps less wget curl net-tools
+FROM moditamam/selenium:python3
+RUN apt-get update && apt-get install -y procps less wget
+
+
+RUN apt-get install -y python3 python3-pip
+
+WORKDIR /app
+
+# Copy the current directory contents into the container as /app
+COPY . /app
 
 #RUN pip install selenium
 # install google chrome
@@ -14,16 +22,15 @@ RUN apt-get update && apt-get install -y procps less wget curl net-tools
 #RUN unzip /tmp/chromedriver.zip chromedriver -d /usr/local/bin/
 
 # install requirements
-RUN python -m pip install --upgrade pip
 
 EXPOSE 8777
 
 # Set the working directory to /app
-WORKDIR /app
+
 COPY ["MainScores.py", "Scores.py", "Scores.txt", "Utils.py", "requirements.txt", "/app/"]
 COPY "tests/e2e.py" "/app/tests/"
 #COPY "tests/chromedriver" "tests/chromedriver"
-COPY templates/ /app/templates
+#COPY templates/ /app/templates
 RUN pip3 install -r requirements.txt
 
 

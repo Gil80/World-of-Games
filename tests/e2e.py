@@ -3,8 +3,9 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
 
 
-#driver = webdriver.Chrome(executable_path="test/chromedriver")
-driver = webdriver.Chrome(ChromeDriverManager().install())
+driver = webdriver.Chrome(executable_path="/usr/bin/chromedriver")
+#driver = webdriver.Chrome(ChromeDriverManager().install())
+
 
 
 def main_function():
