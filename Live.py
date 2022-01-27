@@ -13,12 +13,6 @@ def welcome(name):
         return welcome(input_name_try)
 
 
-print(logo)
-print('\n' * 2)
-input_name = input("Please type in your name: \n")
-welcome(input_name)
-
-
 def load_game():
     print("Please choose a game to play:\n")
     game = input("1. Memory game - a sequence of numbers will appear for 1 second and you have to guess it back\n"
@@ -43,3 +37,9 @@ def load_game():
     else:
         print("\nERROR! You have entered an invalid `game` selection. Please try again")
         return load_game()
+
+
+print(logo)
+print('\n' * 2)
+input_name = input("Please type in your name: \n")
+welcome(input_name)
