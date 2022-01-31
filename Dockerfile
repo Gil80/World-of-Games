@@ -1,4 +1,4 @@
-FROM gil80/py-flask:v4.5
+FROM gil80/py-flask
 #moditamam/selenium:python3
 
 #RUN apt-get update && apt-get install -y procps less wget
