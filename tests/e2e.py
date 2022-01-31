@@ -15,8 +15,7 @@ chromeOptions.add_argument("--disable-extensions")
 chromeOptions.headless = True
 chrome_driver = webdriver.Chrome(options=chromeOptions)  # comment this line when running locally.
 
-url = 'http://172.17.0.2:8777'
-
+url = 'http://localhost:8777'
 
 def test_score_service():
     try:
