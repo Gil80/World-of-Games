@@ -1,4 +1,4 @@
-FROM gil80/py-flask:v4.5
+FROM python
 WORKDIR ./app
 COPY . /app
 COPY requirements.txt requirements.txt
