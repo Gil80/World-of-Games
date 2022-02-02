@@ -1,22 +1,21 @@
 pipeline {
+    agent {
+        dockerfile true
+    }
     stages {
-        stage('Build') { 
+        stage('build') {
             steps {
-                sh 'docker rm -f flask-api'
-                sh 'docker rmi -f flask-app'
-                sh 'docker build -t flask-app /app'
-                sh 'docker run -d --network jenkins_bridge -h my-flask-app --name flask-api flask-app'
+                sh 'python --version'
             }
         }
-        stage('Run') { 
+        stage('Run Score flask') {
             steps {
-                sh 'sleep 5'
-                sh 'curl 172.18.0.4:80'
+                sh 'python ./MainScores.py &'
             }
         }
-        stage('Test') { 
+        stage('Test with E2E') {
             steps {
-                sh 'python /app/tests/e2e.py' 
+                sh 'python tests/e2e.py'
             }
         }
     }
