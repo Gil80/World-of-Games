@@ -1,0 +1,209 @@
+Started by user gil
+Obtained Jenkinsfile from git https://github.com/Gil80/WorldOfGames
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in /var/jenkins_home/workspace/py-flask
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout
+The recommended git tool is: git
+No credentials specified
+Cloning the remote Git repository
+Cloning repository https://github.com/Gil80/WorldOfGames
+ > git init /var/jenkins_home/workspace/py-flask # timeout=10
+Fetching upstream changes from https://github.com/Gil80/WorldOfGames
+ > git --version # timeout=10
+ > git --version # 'git version 2.30.2'
+ > git fetch --tags --force --progress -- https://github.com/Gil80/WorldOfGames +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git config remote.origin.url https://github.com/Gil80/WorldOfGames # timeout=10
+ > git config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/* # timeout=10
+Avoid second fetch
+ > git rev-parse refs/remotes/origin/master^{commit} # timeout=10
+Checking out Revision 66a99b44e2faba103558715df529ff059cdcf6f2 (refs/remotes/origin/master)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 66a99b44e2faba103558715df529ff059cdcf6f2 # timeout=10
+Commit message: "Merge pull request #9 from awakzdev/WOG"
+First time build. Skipping changelog.
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Agent Setup)
+[Pipeline] isUnix
+[Pipeline] readFile
+[Pipeline] sh
++ docker build -t 551740c246860298d4608c70d99114316196c28c -f Dockerfile .
+Sending build context to Docker daemon   31.2MB
+
+Step 1/8 : FROM python
+latest: Pulling from library/python
+0c6b8ff8c37e: Pulling fs layer
+412caad352a3: Pulling fs layer
+e6d3e61f7a50: Pulling fs layer
+461bb1d8c517: Pulling fs layer
+808edda3c2e8: Pulling fs layer
+724cfd2dc19b: Pulling fs layer
+8bd4965a24ab: Pulling fs layer
+fccd5fa208a8: Pulling fs layer
+af1ca64a0eec: Pulling fs layer
+461bb1d8c517: Waiting
+808edda3c2e8: Waiting
+724cfd2dc19b: Waiting
+8bd4965a24ab: Waiting
+fccd5fa208a8: Waiting
+412caad352a3: Verifying Checksum
+412caad352a3: Download complete
+e6d3e61f7a50: Verifying Checksum
+e6d3e61f7a50: Download complete
+0c6b8ff8c37e: Download complete
+724cfd2dc19b: Verifying Checksum
+724cfd2dc19b: Download complete
+0c6b8ff8c37e: Pull complete
+461bb1d8c517: Verifying Checksum
+461bb1d8c517: Download complete
+412caad352a3: Pull complete
+e6d3e61f7a50: Pull complete
+fccd5fa208a8: Download complete
+8bd4965a24ab: Verifying Checksum
+8bd4965a24ab: Download complete
+af1ca64a0eec: Verifying Checksum
+af1ca64a0eec: Download complete
+461bb1d8c517: Pull complete
+808edda3c2e8: Verifying Checksum
+808edda3c2e8: Download complete
+808edda3c2e8: Pull complete
+724cfd2dc19b: Pull complete
+8bd4965a24ab: Pull complete
+fccd5fa208a8: Pull complete
+af1ca64a0eec: Pull complete
+Digest: sha256:a7a73f894e756267b2bac3b068e51ad50aa06f16855a9c6b208630d48937796f
+Status: Downloaded newer image for python:latest
+ ---> e2e732b7951f
+Step 2/8 : WORKDIR ./app
+ ---> Running in e1444d06f9b4
+Removing intermediate container e1444d06f9b4
+ ---> c9243cbe074c
+Step 3/8 : COPY . /app
+ ---> 83b0cdd95316
+Step 4/8 : COPY requirements.txt requirements.txt
+ ---> a32b7e2590ef
+Step 5/8 : RUN pip install --upgrade pip
+ ---> Running in fb7d2028816d
+Requirement already satisfied: pip in /usr/local/lib/python3.10/site-packages (21.2.4)
+Collecting pip
+  Downloading pip-22.0.2-py3-none-any.whl (2.1 MB)
+Installing collected packages: pip
+  Attempting uninstall: pip
+    Found existing installation: pip 21.2.4
+    Uninstalling pip-21.2.4:
+      Successfully uninstalled pip-21.2.4
+[91mWARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+[0mSuccessfully installed pip-22.0.2
+Removing intermediate container fb7d2028816d
+ ---> 2384cc670e20
+Step 6/8 : RUN pip install -r requirements.txt
+ ---> Running in 06865c6abf12
+Collecting flask
+  Downloading Flask-2.0.2-py3-none-any.whl (95 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 95.2/95.2 KB 1.0 MB/s eta 0:00:00
+Collecting Beautifulsoup4
+  Downloading beautifulsoup4-4.10.0-py3-none-any.whl (97 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 97.4/97.4 KB 3.6 MB/s eta 0:00:00
+Collecting Validators
+  Downloading validators-0.18.2-py3-none-any.whl (19 kB)
+Collecting requests
+  Downloading requests-2.27.1-py2.py3-none-any.whl (63 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 63.1/63.1 KB 6.2 MB/s eta 0:00:00
+Collecting Jinja2>=3.0
+  Downloading Jinja2-3.0.3-py3-none-any.whl (133 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 133.6/133.6 KB 6.1 MB/s eta 0:00:00
+Collecting Werkzeug>=2.0
+  Downloading Werkzeug-2.0.2-py3-none-any.whl (288 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 288.9/288.9 KB 4.6 MB/s eta 0:00:00
+Collecting itsdangerous>=2.0
+  Downloading itsdangerous-2.0.1-py3-none-any.whl (18 kB)
+Collecting click>=7.1.2
+  Downloading click-8.0.3-py3-none-any.whl (97 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 97.5/97.5 KB 16.0 MB/s eta 0:00:00
+Collecting soupsieve>1.2
+  Downloading soupsieve-2.3.1-py3-none-any.whl (37 kB)
+Collecting six>=1.4.0
+  Downloading six-1.16.0-py2.py3-none-any.whl (11 kB)
+Collecting decorator>=3.4.0
+  Downloading decorator-5.1.1-py3-none-any.whl (9.1 kB)
+Collecting charset-normalizer~=2.0.0
+  Downloading charset_normalizer-2.0.11-py3-none-any.whl (39 kB)
+Collecting idna<4,>=2.5
+  Downloading idna-3.3-py3-none-any.whl (61 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 61.2/61.2 KB 6.2 MB/s eta 0:00:00
+Collecting certifi>=2017.4.17
+  Downloading certifi-2021.10.8-py2.py3-none-any.whl (149 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 149.2/149.2 KB 8.3 MB/s eta 0:00:00
+Collecting urllib3<1.27,>=1.21.1
+  Downloading urllib3-1.26.8-py2.py3-none-any.whl (138 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 138.7/138.7 KB 8.0 MB/s eta 0:00:00
+Collecting MarkupSafe>=2.0
+  Downloading MarkupSafe-2.0.1-cp310-cp310-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_12_x86_64.manylinux2010_x86_64.whl (30 kB)
+Installing collected packages: certifi, Werkzeug, urllib3, soupsieve, six, MarkupSafe, itsdangerous, idna, decorator, click, charset-normalizer, Validators, requests, Jinja2, Beautifulsoup4, flask
+Successfully installed Beautifulsoup4-4.10.0 Jinja2-3.0.3 MarkupSafe-2.0.1 Validators-0.18.2 Werkzeug-2.0.2 certifi-2021.10.8 charset-normalizer-2.0.11 click-8.0.3 decorator-5.1.1 flask-2.0.2 idna-3.3 itsdangerous-2.0.1 requests-2.27.1 six-1.16.0 soupsieve-2.3.1 urllib3-1.26.8
+[91mWARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+[0mRemoving intermediate container 06865c6abf12
+ ---> ffa4fb01be03
+Step 7/8 : EXPOSE 8777
+ ---> Running in ccc6e51778b9
+Removing intermediate container ccc6e51778b9
+ ---> 86ab532553d4
+Step 8/8 : CMD ["python", "flask"]
+ ---> Running in a775bf2e3143
+Removing intermediate container a775bf2e3143
+ ---> 7852bc74f128
+Successfully built 7852bc74f128
+Successfully tagged 551740c246860298d4608c70d99114316196c28c:latest
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] isUnix
+[Pipeline] sh
++ docker inspect -f . 551740c246860298d4608c70d99114316196c28c
+.
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] withDockerContainer
+Jenkins does not seem to be running inside a container
+$ docker run -t -d -u 1000:1000 -w /var/jenkins_home/workspace/py-flask -v /var/jenkins_home/workspace/py-flask:/var/jenkins_home/workspace/py-flask:rw,z -v /var/jenkins_home/workspace/py-flask@tmp:/var/jenkins_home/workspace/py-flask@tmp:rw,z -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** 551740c246860298d4608c70d99114316196c28c cat
+$ docker top e0eca97f2c795da0467ecd25b8e160b42e0f22b32da50828ba436aca626bc86c -eo pid,comm
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (build)
+[Pipeline] sh
++ python --version
+Python 3.10.2
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Run Score flask)
+[Pipeline] sh
++ python ./MainScores.py
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Test with E2E)
+[Pipeline] sh
++ python ./e2e.py
+Code 0, Website is up and running
+The score is 32
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+$ docker stop --time=1 e0eca97f2c795da0467ecd25b8e160b42e0f22b32da50828ba436aca626bc86c
+$ docker rm -f e0eca97f2c795da0467ecd25b8e160b42e0f22b32da50828ba436aca626bc86c
+[Pipeline] // withDockerContainer
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS
