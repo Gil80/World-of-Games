@@ -1,13 +1,6 @@
 pipeline {
     agent { label 'agent_1' }
     stages {
-        stage('Checkout') { 
-            steps {
-                sh 'git config --global user.name gil80'
-                sh 'git init'
-                sh 'git checkout -b master'
-            }
-        }
         stage('Build') { 
             steps {
                 sh 'docker rm -f flask-api'
